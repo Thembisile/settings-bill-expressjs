@@ -17,7 +17,7 @@
     "moment": "^2.22.2"
   },
   "directories": {
-    "test": "test"
+    "test": "mocha"
   },
   "engines": {
     "node": "8.0.0"
