@@ -104,7 +104,7 @@ module.exports = function () {
   function actionsType(billType) {
     return list.filter((bill) => bill.type === billType);
   }
-
+  
   return {
     warningSets,
     criticalSets,
