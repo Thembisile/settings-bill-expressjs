@@ -61,6 +61,10 @@ module.exports = function () {
     let billCost = 0;
     let billTypeSet = costType;
 
+    if (total >= critical) {
+      return;
+    }
+
     if (billTypeSet === 'SMS') {
       smss += sms;
       billCost += sms;
@@ -80,12 +84,12 @@ module.exports = function () {
   }
 
   function actionsReturn() {
+
     return list;
   }
 
   function colorUpdate() {
-    
-    
+
     if (total >= critical) {
       color = 'danger';
       return color;
