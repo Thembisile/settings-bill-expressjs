@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "mocha"
   },
   "keywords": [
     "heroku"
@@ -17,7 +17,7 @@
     "moment": "^2.22.2"
   },
   "directories": {
-    "test": "mocha"
+    "test": "test"
   },
   "engines": {
     "node": "8.0.0"
