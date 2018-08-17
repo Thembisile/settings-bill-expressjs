@@ -5,13 +5,15 @@
             <tr>
                 <th>Type</th>
                 <th>Price</th>
+                <th>Ago</th>
                 <th>When</th>
             </tr>
             {{#each actions}}
             <tr>
                 <td>{{type}}</td>
                 <td>R {{cost}}</td>
-                <td>{{fancyTime time}}</td>
+                <td>{{fancyTime}}</td>
+                {{!-- <td>{{time}}</td> --}}
             </tr>
             {{/each}}
         </table>

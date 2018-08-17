@@ -3,20 +3,32 @@ let exphbs = require('express-handlebars');
 let bodyParser = require('body-parser');
 let SettingsBills = require('./SettingsBills');
 let moment = require('moment');
+let flash = require('express-flash');
+let session = require('express-session');
+let flish = require('flish');
 
 let app = express();
 let settingsBill = SettingsBills();
 
-function fancyTimeHandlebarsHelper(param, context){
+function fancyTimeHandlebarsHelper(param, context) {
     return moment(param).fromNow();
 }
 
+app.use(session({
+    secret: "bill",
+    resave: false,
+    saveUninitialized: true
+}));
+
+// initialise the flash middleware
+app.use(flash());
+
 app.engine('handlebars', exphbs(
-    { 
-        defaultLayout: 'main', 
-        helpers : {
-            fancyTime: fancyTimeHandlebarsHelper
-        } 
+    {
+        defaultLayout: 'main',
+        helpers: {
+            fancyTime: fancyTimeHandlebarsHelper,
+        }
     }));
 app.set('view engine', 'handlebars');
 
@@ -76,24 +88,27 @@ app.post('/action', function (req, res) {
 
 app.get('/actions', function (req, res) {
     let totalAction = settingsBill.actionsReturn();
-    // totalAction.forEach(function (total) {
-    //     total.fancyTime = moment(total.time).fromNow();
-    // })
-    res.render('actions', { actions : totalAction });
+    res.render('actions', { actions: totalAction });
 })
 
 app.get('/actions/:billType', function (req, res) {
     let billAction = req.params.billType;
     let actions = settingsBill.actionsType(billAction);
-    
-    // actions.forEach(function (action) {
-    //     action.fancyTime = moment(action.time).fromNow();
-    // });
 
     res.render('actions', { actions })
 })
 
-let PORT = process.env.PORT || 3007;
+app.post('/reset', function (req, res) {
+    settingsBill.reset();
+    // req.flash('warning', 'All data cleared out!');
+    res.redirect('/');
+})
+
+app.get('/notification', function(req, res){
+    
+})
+
+let PORT = process.env.PORT || 5050;
 
 app.listen(PORT, function () {
     console.log('App running on port', PORT);

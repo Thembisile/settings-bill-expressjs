@@ -104,7 +104,20 @@ module.exports = function () {
   function actionsType(billType) {
     return list.filter((bill) => bill.type === billType);
   }
-  
+
+  function reset(){
+    calls = 0;
+    smss = 0;
+    total = 0;
+  }
+
+  function notification(){
+    if (total >= critical) {
+      notify = 'danger';
+      return;
+    }
+  }
+
   return {
     warningSets,
     criticalSets,
@@ -120,6 +133,8 @@ module.exports = function () {
     getWarning,
     getSms,
     actionsReturn,
-    actionsType
+    actionsType,
+    reset,
+    notification
   }
 }
