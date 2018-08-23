@@ -5,7 +5,6 @@ let SettingsBills = require('./SettingsBills');
 let moment = require('moment');
 let flash = require('express-flash');
 let session = require('express-session');
-let flish = require('flish');
 
 let app = express();
 let settingsBill = SettingsBills();
@@ -41,10 +40,10 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 app.get('/', function (req, res) {
-    let call = settingsBill.getCall();;
-    let sms = settingsBill.getSms();;
-    let warning = settingsBill.getWarning();;
-    let critical = settingsBill.getCritical();;
+    let call = settingsBill.getCall();
+    let sms = settingsBill.getSms();
+    let warning = settingsBill.getWarning();
+    let critical = settingsBill.getCritical();
 
     let callCostType = settingsBill.callsFunction();
     let smsCostType = settingsBill.smssFunction();
@@ -102,10 +101,6 @@ app.post('/reset', function (req, res) {
     settingsBill.reset();
     // req.flash('warning', 'All data cleared out!');
     res.redirect('/');
-})
-
-app.get('/notification', function(req, res){
-    
 })
 
 let PORT = process.env.PORT || 5050;

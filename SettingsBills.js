@@ -109,6 +109,10 @@ module.exports = function () {
     calls = 0;
     smss = 0;
     total = 0;
+    call = 0;
+    sms = 0;
+    warning = 0;
+    critical = 0;
   }
 
   function notification(){
